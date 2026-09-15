@@ -1,0 +1,78 @@
+// Variables
+$color1: white;
+$color2: rgb(46, 46, 46);
+$color3: rgb(0, 104, 136);
+
+// Mixins
+@mixin flex($direction: row, $justify: center, $align: center, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  gap: $gap;
+}
+
+@mixin grid($col: 1fr, $gap: 1rem, $row: unset) {
+  display: grid;
+  grid-template-columns: $col;
+  grid-template-rows: $row;
+  gap: $gap;
+}
+
+@mixin square($size: 1rem) {
+  width: $size;
+  height: $size;
+}
+
+@mixin heading($letter-spacing: 2px, $weight: 400, $case: uppercase) {
+  text-transform: $case;
+  letter-spacing: $letter-spacing;
+  font-weight: $weight;
+}
+
+@mixin base-shadow {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+@mixin baseShadow {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.384);
+}
+
+@mixin posCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin inputStyle(
+  $w: 100%,
+  $p: 1rem,
+  $bgColor: inherit,
+  $border: 1px solid rgba(0, 0, 0, 0.2)
+) {
+  width: $w;
+  padding: $p;
+  background-color: $bgColor;
+  border: $border;
+  outline: none;
+  border-radius: 5px;
+  font-size: 1.05rem;
+}
+
+@mixin btn($padding: 1rem, $bg: $color3, $color: $color1) {
+  padding: $padding;
+  background-color: $bg;
+  color: $color;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

@@ -1,11 +1,8 @@
 # Dependencies
 node_modules/
 
-# Production builds
+# Production build
 dist/
-dist-ssr/
-build/
-uploads/
 
 # Environment files
 .env
@@ -19,16 +16,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
 
-# OS & Editor files
+# Editor & OS files
 .DS_Store
 Thumbs.db
 .vscode/
-!.vscode/extensions.json
 .idea/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
