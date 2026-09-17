@@ -7,9 +7,9 @@ import {
   getAllcategoriesProducts,
   getAdminProducts,
   getSingleProduct,
-  singleUploadProduct,
   deleteProduct,
   getAllProducts,
+  updateProduct,
 } from "../controllers/product.js";
 import { singleUpload } from "../middlewares/multer.js";
 
@@ -22,14 +22,14 @@ app.get("/latest", getlatestProducts);
 app.get("/categories", getAllcategoriesProducts);
 //to get all products
 app.get("/admin-product", adminOnly, getAdminProducts);
-// to get, update and delete product
+//to get all products with filters
+app.get("/all", getAllProducts);
+
+// To get, update, delete Product
 app
   .route("/:id")
   .get(getSingleProduct)
-  .put(adminOnly, singleUpload, singleUploadProduct)
+  .put(adminOnly, singleUpload, updateProduct)
   .delete(adminOnly, deleteProduct);
-
-//to get all products with filters
-app.get("/all", getAllProducts);
 
 export default app;
