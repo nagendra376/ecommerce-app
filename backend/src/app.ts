@@ -10,7 +10,7 @@ import { config } from "dotenv";
 import NodeCache from "node-cache";
 import morgan from "morgan";
 import { Stripe } from "stripe";
-
+import cors from "cors";
 
 config({
   path: "./.env",
@@ -30,11 +30,8 @@ const app = express();
 
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
-app.use(morgan("dev"))
-
-app.get("/", (req, res) => {
-  res.send("api working ");
-});
+app.use(morgan("dev"));
+app.use(cors());
 
 //using routes
 app.use("/api/v1/user", userRoute);
@@ -44,6 +41,10 @@ app.use("/api/v1/payment", paymentRoute);
 app.use("/api/v1/dashboard", dashboardRoute);
 
 app.use(errorMiddleware);
+
+app.get("/", (req, res) => {
+  res.send("api working ");
+});
 
 app.listen(port, () => {
   console.log(`Server is working on http://localhost:${port}`);

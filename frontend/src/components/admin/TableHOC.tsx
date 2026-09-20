@@ -45,35 +45,50 @@ function TableHOC<T extends Object>(
 
         <table className="table" {...getTableProps()}>
           <thead>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                    {column.render("Header")}
-                    {column.isSorted && (
-                      <span>
-                        {" "}
-                        {column.isSortedDesc ? (
-                          <AiOutlineSortDescending />
-                        ) : (
-                          <AiOutlineSortAscending />
+            {headerGroups.map((headerGroup) => {
+              const { key, ...restHeaderGroupProps } =
+                headerGroup.getHeaderGroupProps();
+              return (
+                <tr key={key} {...restHeaderGroupProps}>
+                  {headerGroup.headers.map((column) => {
+                    const { key: colKey, ...restColumnProps } =
+                      column.getHeaderProps(column.getSortByToggleProps());
+                    return (
+                      <th key={colKey} {...restColumnProps}>
+                        {column.render("Header")}
+                        {column.isSorted && (
+                          <span>
+                            {" "}
+                            {column.isSortedDesc ? (
+                              <AiOutlineSortDescending />
+                            ) : (
+                              <AiOutlineSortAscending />
+                            )}
+                          </span>
                         )}
-                      </span>
-                    )}
-                  </th>
-                ))}
-              </tr>
-            ))}
+                      </th>
+                    );
+                  })}
+                </tr>
+              );
+            })}
           </thead>
           <tbody {...getTableBodyProps()}>
             {page.map((row) => {
               prepareRow(row);
+              const { key: rowKey, ...restRowProps } = row.getRowProps();
 
               return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                  ))}
+                <tr key={rowKey} {...restRowProps}>
+                  {row.cells.map((cell) => {
+                    const { key: cellKey, ...restCellProps } =
+                      cell.getCellProps();
+                    return (
+                      <td key={cellKey} {...restCellProps}>
+                        {cell.render("Cell")}
+                      </td>
+                    );
+                  })}
                 </tr>
               );
             })}

@@ -21,7 +21,7 @@ app.get("/latest", getlatestProducts);
 //to get all unique categories
 app.get("/categories", getAllcategoriesProducts);
 //to get all products
-app.get("/admin-product", adminOnly, getAdminProducts);
+app.get("/admin-products", adminOnly, getAdminProducts);
 //to get all products with filters
 app.get("/all", getAllProducts);
 

@@ -24,6 +24,8 @@ export const getlatestProducts = tryCatch(async (req, res, next) => {
     nodeCache.set("latest-product", JSON.stringify(products));
   }
 
+  
+
   return res.status(200).json({
     success: true,
     products,
