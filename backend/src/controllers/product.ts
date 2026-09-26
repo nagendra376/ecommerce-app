@@ -24,15 +24,13 @@ export const getlatestProducts = tryCatch(async (req, res, next) => {
     nodeCache.set("latest-product", JSON.stringify(products));
   }
 
-  
-
   return res.status(200).json({
     success: true,
     products,
   });
 });
 
-export const getAllcategoriesProducts = tryCatch(async (req, res, next) => {
+export const getAllcategoriesProducts = tryCatch(async (req, res, next) => { 
   let categories;
 
   if (nodeCache.has("categories")) {
@@ -64,7 +62,6 @@ export const getAdminProducts = tryCatch(async (req, res, next) => {
 
 export const newProduct = tryCatch(
   async (req: Request<{}, {}, NewProductReqestBody>, res, next) => {
-    console.log("test1");
     const { name, price, stock, category } = req.body;
 
     const photo = req.file;

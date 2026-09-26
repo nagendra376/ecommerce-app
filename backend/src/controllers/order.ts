@@ -7,7 +7,7 @@ import ErrorHandler from "../utils/utility-class.js";
 import { nodeCache } from "../app.js";
 
 export const newOrder = tryCatch(
-  async (req: Request<{}, {}, NewOrderRequestBody>, res, next) => {
+  async (req: Request<{}, {}, NewOrderRequestBody>, res, next) => { //NewOrderRequestBody: define the req type(like ReqBody)
     const {
       shippingInfo,
       orderItems,
@@ -35,7 +35,7 @@ export const newOrder = tryCatch(
 
     await reduceStock(orderItems);
 
-    await invalidateCache({
+    await invalidateCache({ //remove the old cache 
       product: true,
       order: true,
       admin: true,
@@ -56,7 +56,7 @@ export const myOrders = tryCatch(async (req, res, next) => {
   let orders = [];
 
   if (nodeCache.has(key)) {
-    orders = JSON.parse(nodeCache.get(key) as string);
+    orders = JSON.parse(nodeCache.get(key) as string); //.parse: converts string to obj
   } else {
     orders = await Order.find({ user });
     nodeCache.set(key, JSON.stringify(orders));
@@ -77,7 +77,7 @@ export const allOrders = tryCatch(async (req, res, next) => {
     orders = JSON.parse(nodeCache.get(key) as string);
   } else {
     orders = await Order.find().populate("user", "name");
-    nodeCache.set(key, JSON.stringify(orders));
+    nodeCache.set(key, JSON.stringify(orders)); //stringify: obj to json string
   }
 
   return res.status(200).json({
@@ -96,7 +96,7 @@ export const getSingleOrder = tryCatch(async (req, res, next) => {
   if (nodeCache.has(key)) {
     order = JSON.parse(nodeCache.get(key) as string);
   } else {
-    order = await Order.findById(id).populate("user", "name");
+    order = await Order.findById(id).populate("user", "name");  //.populate: mongoose schema join.. it goes to user collection and find name there and add it to the order doc as obj  
     if (!order) return next(new ErrorHandler("Order Mot Found", 404));
     nodeCache.set(key, JSON.stringify(order));
   }

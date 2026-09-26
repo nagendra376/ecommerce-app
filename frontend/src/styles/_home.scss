@@ -2,8 +2,6 @@
   padding: 2rem 5%;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 4rem);
-
   width: 100%;
 
   > section {
@@ -19,23 +17,48 @@
     @include flex(row, space-between, center);
   }
 
+  .leftArrow {
+    position: absolute;
+    bottom: 100px;
+    z-index: 10;
+    padding: 10px;
+    border: 1px solid #111;
+    border-radius: 100px;
+  }
+
+  .rightArrow {
+    position: absolute;
+    bottom: 106px;
+    z-index: 10;
+    right: 30px;
+    padding: 10px;
+    border: 1px solid #111;
+    border-radius: 100px;
+  }
+
   .findmore {
     font-size: 1rem;
   }
 
   > main {
     width: 100%;
-    flex: 1;
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     overflow-x: auto;
+    scroll-behavior: smooth;
+    height: 100%;
+
+    // Hide scrollbar for Chrome, Safari, and Opera
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 
 .product-card {
   width: 18.75rem;
   padding: 1rem;
-  flex: none;
+  flex: 0 0 18.75rem;
 
   @include flex(column, flex-start, center, 4px);
 

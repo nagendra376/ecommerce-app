@@ -22,7 +22,7 @@ export const newUser = tryCatch(async (req, res, next) => {
 
   user = await User.create({
     name,
-    email,
+    email, 
     photo,
     gender,
     _id,
